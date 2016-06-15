@@ -9,9 +9,13 @@
   <tbody>
     <%@words.each_index do |word|%>
     <tr> 
-      <td><%="Step #{word+1}"%>
+      <td><%="Step #{word}"%>
       <td><%=@words[word]%></td>
     </tr>
     <%end%>
+    <tr>
+      <td>Goal</td>
+      <td><%=@goal%></td>
+    </tr>
   </tbody>
 </table>

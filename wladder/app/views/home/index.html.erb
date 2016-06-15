@@ -16,6 +16,8 @@ Step 0:  <%=@startend[0]%>
   <br>
   <%=label_tag(:word5, "Step 5: ")%> 
   <%=text_field_tag(:word5)%> 
+  <%=hidden_field_tag(:word0, value=@startend[0])%>
+  <%=hidden_field_tag(:goal, value=@startend[1])%>
   <%=submit_tag("Check")%>
 <%end%>
 Goal:  <%=@startend[1]%>
