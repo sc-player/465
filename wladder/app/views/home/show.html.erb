@@ -1,0 +1,17 @@
+<%=link_to "Play Again", root_path %>
+<h1>Your Guesses</h1>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2"></th>
+    <tr>
+  <thead>
+  <tbody>
+    <%@words.each_index do |word|%>
+    <tr> 
+      <td><%="Step #{word}"%>
+      <td><%=@words[word]%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
