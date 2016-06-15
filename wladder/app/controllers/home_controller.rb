@@ -1,6 +1,8 @@
+load "#{Rails.root}/lib/ladder.rb"
+
 class HomeController < ApplicationController
   def index
-      
+    @startend=dictionary.shuffle.take(2)
   end
 
   def show
