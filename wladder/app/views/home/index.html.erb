@@ -22,5 +22,5 @@ Step 0:  <%=@startend[0]%>
   <%=submit_tag("Check")%>
 <%end%>
 Goal:  <%=@startend[1]%><br>
-<%=button_to "Switch Dicitonary", index_path, method: "get", params:{dictSize: !@dict_size}%>
+<%=button_to "Switch Dicitonary", index_path, method: "get", params:{dictSize: (@startend[0].length==4)}%>
 </body>

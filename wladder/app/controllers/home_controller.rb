@@ -1,15 +1,9 @@
 load "#{Rails.root}/lib/ladder.rb"
-@dict_size=false
+load "#{Rails.root}/lib/words4.rb"
+load "#{Rails.root}/lib/words5.rb"
 class HomeController < ApplicationController
   def index
-    if params[:dictSize]!=""
-      @dict_size=params[:dictSize] 
-    else
-      @dict_size=false
-    end
-    logger.debug @dict_size
-    switchDict @dict_size
-    @startend=wldictionary.shuffle.take(2)
+    @startend=((params[:dictSize]=="true") ? wldictionary5.shuffle.take(2) : wldictionary4.shuffle.take(2))
   end
 
   def show

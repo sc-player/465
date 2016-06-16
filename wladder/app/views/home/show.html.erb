@@ -1,4 +1,4 @@
-<%=link_to "Play Again", root_path %>
+<%=button_to "Play Again", index_path, method: "get", params:{dictSize: (@words[0].length==5)}%>
 <h1>Your Guesses</h1>
 <table>
   <thead>

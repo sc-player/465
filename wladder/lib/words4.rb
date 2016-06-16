@@ -1,4 +1,4 @@
-def wldictionary
+def wldictionary4
 ["aahs",
 "aals",
 "abas",
