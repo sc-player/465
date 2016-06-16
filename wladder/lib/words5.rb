@@ -1,4 +1,4 @@
-def dictionary
+def wldictionary
 ["aargh",
 "abaca",
 "abaci",

@@ -4,13 +4,20 @@
 # by loading it:
 #   load "#{Rails.root}/lib/ladder.rb"
 
-
-# only load one dictionary
-# load the dictionary of 4-letter words
 load "#{Rails.root}/lib/words4.rb"
 
-# load the dictionary of 5-letter words
-#load "#{Rails.root}/lib/words5.rb"
+def switchDict size
+#  Object.send :remove_const, :wldictionary
+  logger.debug wldictionary
+  load "#{Rails.root}/lib/words#{(size) ? 5 : 4}.rb"
+  logger.debug "*"*50
+  logger.debug "*"*50
+  logger.debug "*"*50
+  logger.debug "#{Rails.root}/lib/words#{(size) ? 5 : 4}.rb"
+  logger.debug "*"*50
+  logger.debug "*"*50
+  logger.debug "*"*50
+end
 
 # return true if the two strings differ by only one letter
 def edit_distance_of_one word1, word2

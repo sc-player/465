@@ -1,8 +1,15 @@
 load "#{Rails.root}/lib/ladder.rb"
-
+@dict_size=false
 class HomeController < ApplicationController
   def index
-    @startend=dictionary.shuffle.take(2)
+    if params[:dictSize]!=""
+      @dict_size=params[:dictSize] 
+    else
+      @dict_size=false
+    end
+    logger.debug @dict_size
+    switchDict @dict_size
+    @startend=wldictionary.shuffle.take(2)
   end
 
   def show
