@@ -15,6 +15,6 @@ class HomeController < ApplicationController
     @words << params[:word4] if params[:word4]!=""
     @words << params[:word5] if params[:word5]!=""
     @words << params[:goal]
-    @victory=legal @words
+    @victory=legal(@words,((params[:word0].length==5) ? wldictionary5 : wldictionary4))
   end
 end

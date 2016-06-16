@@ -19,7 +19,7 @@ end
 
 # return true if the array steps contains a legal "ladder" progression from
 # the first word to the last word
-def legal steps
+def legal steps, dictionary
 
   # if any of the words are not in the dictionary
   steps.each do |word|
