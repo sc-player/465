@@ -17,7 +17,10 @@
 
 <p>
   <strong>Created at:</strong>
-  <%= @reference.created_at %>
+  <% @datetime=@reference.created_at.to_s %> 
+  <% @date=@datetime[0..9].gsub!("-", "/") %>
+  <% @time=@datetime[11..19] %>
+  <%=@time+@date+" PST" %>
 </p>
 <%= link_to 'New', new_reference_path%>
 <%= link_to 'Destroy', @reference, method: :delete, data: { confirm: "Are you sure?" }%> |
