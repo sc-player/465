@@ -7,6 +7,8 @@
 </p>
 
 <p>
+  <%=button_to "Make #{(@image.public) ? "Private" : "Public"}", image_path(@image, :image => { :public => !(@image.public)}), :method => :put%>
+<p>
   <% @image.tags.each do |t| %>
     <%=t.str%>
     <%if owner%>
