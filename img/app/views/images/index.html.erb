@@ -1,11 +1,10 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Images</h1>
 
+<% unless user_signed_in? %>
 <table>
   <tbody>
     <% @images.each do |image| %>
-      <% next unless image.public || (user_signed_in? && current_user.id==image.user_id)%>
+      <% next unless image.public %>
       <tr>
         <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
 	<%if user_signed_in? && current_user.id==image.user_id %>
@@ -20,5 +19,58 @@
   </tbody>
 </table>
 
+
+<% else %>
+
+<h3>My Images</h3>
+<table>
+  <tbody>
+    <% @myimages.each do |image| %>
+      <tr>
+        <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
+	<%if user_signed_in? && current_user.id==image.user_id %>
+          <td><%= link_to 'Edit', edit_image_path(image) %></td>
+          <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!--<h3>Friends' images</h3>
+<table>
+  <tbody>
+    <% @friendsimages.each do |image| %>
+      <tr>
+        <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
+	<%if user_signed_in? && current_user.id==image.user_id %>
+          <td><%= link_to 'Edit', edit_image_path(image) %></td>
+          <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+      <tr>
+        <td><%=User.find(image.user_id).name%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>-->
+<h3>Public Images</h3>
+<table>
+  <tbody>
+    <% @publicimages.each do |image| %>
+      <tr>
+        <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
+	<%if user_signed_in? && current_user.id==image.user_id %>
+          <td><%= link_to 'Edit', edit_image_path(image) %></td>
+          <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+      <tr>
+        <td><%=User.find(image.user_id).name%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br>
-<%= link_to('New Image', new_image_path) if user_signed_in? %>
+<%= link_to('New Image', new_image_path) %>
+<% end %>

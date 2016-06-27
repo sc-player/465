@@ -4,12 +4,18 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    unless user_signed_in?
+      @images = Image.all
+    else
+      @myimages = Image.where("user_id = ?", current_user.id)
+      @friendsimages=Image.all
+      @publicimages=Image.where("user_id != ? AND public = ?", current_user.id, true)
+    end
   end
 
   # GET /images/1
   # GET /images/1.json
-  def show
+  def show 
   end
 
   # GET /images/new
@@ -66,6 +72,11 @@ class ImagesController < ApplicationController
       format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  helper_method :owner
+  def owner
+    user_signed_in? && @image.user_id==current_user.id
   end
 
   private
