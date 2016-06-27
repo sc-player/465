@@ -25,6 +25,14 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     @image = Image.new(image_params)
+    @image.generate_filename
+    @image.user=current_user
+
+    @uploaded_io = params[:image][:uploaded_file]
+
+    File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
+      file.write(@uploaded_io.read)
+    end
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
@@ -61,12 +69,6 @@ class ImagesController < ApplicationController
   end
 
   private
-    def upload
-      uploaded = params[:image][:filename]
-      File.open(Rails.root.join('public', 'uploads', uploaded.original_filename), 'wb') do |file|
-        file.write(uploaded.read)
-      end
-    end
     # Use callbacks to share common setup or constraints between actions.
     def set_image
       @image = Image.find(params[:id])

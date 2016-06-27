@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Filename:</strong>
-  <%= @image.filename %>
+  <%= image_tag @image.filename %>
 </p>
 
-<p>
-  <strong>Public:</strong>
-  <%= @image.public %>
-</p>
 <% if user_signed_in?%>
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
