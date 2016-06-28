@@ -9,7 +9,7 @@
         <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
       </tr>
       <tr>
-        <td><%=User.find(image.user_id).name%></td>
+        <td><%=User.find(image.user.id).name%></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,7 +32,7 @@
   </tbody>
 </table>
 
-<!--<h3>Friends' images</h3>
+<h3>Friends' images</h3>
 <table>
   <tbody>
     <% @friendsimages.each do |image| %>
@@ -40,11 +40,11 @@
         <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
       </tr>
       <tr>
-        <td><%=User.find(image.user_id).name%></td>
+        <td><%= User.find(image.user.id).name%></td>
       </tr>
     <% end %>
   </tbody>
-</table>-->
+</table>
 <h3>Public Images</h3>
 <table>
   <tbody>

@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
   has_many :image
+  has_many :images, through: :image_users
 end

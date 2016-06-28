@@ -8,7 +8,7 @@ class ImagesController < ApplicationController
       @images = Image.all
     else
       @myimages = Image.where("user_id = ?", current_user.id)
-      @friendsimages=Image.all
+      @friendsimages=ImageUser.where("user_id = ?", current_user.id).map{|i| i.image}
       @publicimages=Image.where("user_id != ? AND public = ?", current_user.id, true)
     end
   end
@@ -16,6 +16,7 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show 
+    @image_user=ImageUser.new
   end
 
   # GET /images/new
@@ -78,7 +79,7 @@ class ImagesController < ApplicationController
 
   helper_method :owner
   def owner
-    user_signed_in? && @image.user_id==current_user.id
+    user_signed_in? && @image.user.id==current_user.id
   end
 
   private
