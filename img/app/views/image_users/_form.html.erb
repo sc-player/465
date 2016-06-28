@@ -1,0 +1,10 @@
+<% if @image.users_cant_see.empty? %>
+  All other users can view this image.
+<% else %>
+<%= form_for([@image, @image_user]) do |f| %>
+  <div class="field">
+    <%= f.select :user_id, @image.users_cant_see, html_options:{required: true} %>
+    <%= f.submit "Allow user to view private image" %>
+  </div>
+<% end %>
+<% end %>
