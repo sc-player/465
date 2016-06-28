@@ -5,11 +5,11 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
     unless user_signed_in?
-      @images = Image.all
+      @images = Image.all.shuffle
     else
-      @myimages = Image.where("user_id = ?", current_user.id)
-      @friendsimages=ImageUser.where("user_id = ?", current_user.id).map{|i| i.image}
-      @publicimages=Image.where("user_id != ? AND public = ?", current_user.id, true)
+      @myimages = Image.where("user_id = ?", current_user.id).shuffle
+      @friendsimages=ImageUser.where("user_id = ?", current_user.id).map{|i| i.image}.shuffle
+      @publicimages=Image.where("user_id != ? AND public = ?", current_user.id, true).shuffle
     end
   end
 
