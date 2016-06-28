@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
-  has_many :image
+  #has_many :image
   has_many :images, through: :image_users
 end

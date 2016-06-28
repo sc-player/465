@@ -4,12 +4,10 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    unless user_signed_in?
-      @images = Image.all.shuffle
-    else
+    @publicimages = Image.where("private = ?", false).shuffle
+    if user_signed_in?
       @myimages = Image.where("user_id = ?", current_user.id).shuffle
       @friendsimages=ImageUser.where("user_id = ?", current_user.id).map{|i| i.image}.shuffle
-      @publicimages=Image.where("user_id != ? AND public = ?", current_user.id, true).shuffle
     end
   end
 
@@ -90,6 +88,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:filename, :public)
+      params.require(:image).permit(:filename, :private)
     end
 end

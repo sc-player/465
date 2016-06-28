@@ -7,7 +7,7 @@
 </p>
 
 <p>
-  <%=(button_to "Make #{(@image.public) ? "Private" : "Public"}", image_path(@image, :image => { :public => !(@image.public)}), :method => :put) if owner%>
+  <%=(button_to "Make #{(@image.private) ? "Public" : "Private"}", image_path(@image, :image => { :private => !(@image.private)}), :method => :put) if owner%>
 <p>
   <% @image.tags.each do |t| %>
     <%=t.str%>
@@ -21,7 +21,7 @@
   <%=(link_to "New Tag", new_image_tag_path(@image.id)) if owner %>
 </p>
 
-<% if !@image.public && owner %>
+<% if @image.private && owner %>
 <h4>Allowed to view</h4>
 <p>
   <% @image.image_users.each do |i| %>

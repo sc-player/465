@@ -3,13 +3,12 @@
 <% unless user_signed_in? %>
 <table>
   <tbody>
-    <% @images.each do |image| %>
-      <% next unless image.public %>
+    <% @publicimages.each do |image| %>
       <tr>
         <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
       </tr>
       <tr>
-        <td><%=User.find(image.user.id).name%></td>
+        <td><%=User.find(image.user_id).name%></td>
       </tr>
     <% end %>
   </tbody>
@@ -40,7 +39,7 @@
         <td><%= link_to (image_tag image.filename, size: "100x100"), image %></td>
       </tr>
       <tr>
-        <td><%= User.find(image.user.id).name%></td>
+        <td><%= User.find(image.user_id).name%></td>
       </tr>
     <% end %>
   </tbody>
