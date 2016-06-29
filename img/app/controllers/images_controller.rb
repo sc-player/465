@@ -14,6 +14,11 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show 
+    if @image.private && !owner then
+      if !user_signed_in? || !ImageUser.exists?(user_id: current_user.id, image_id: @image.id) then
+         redirect_to images_path
+      end
+    end
     @image_user=ImageUser.new
   end
 
