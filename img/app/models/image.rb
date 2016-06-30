@@ -3,6 +3,11 @@ class Image < ActiveRecord::Base
   has_many :tags, dependent: :destroy
   has_many :users, through: :image_users
   has_many :image_users, dependent: :destroy
+  before_destroy :delete_img
+
+  def delete_img
+    File.delete(Rails.root.join("public", "images", self.filename))
+  end
   def generate_filename
     self.filename=SecureRandom.uuid+".jpg"
   end
