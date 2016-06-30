@@ -8,9 +8,11 @@ class Image < ActiveRecord::Base
   def delete_img
     File.delete(Rails.root.join("public", "images", self.filename))
   end
+
   def generate_filename
     self.filename=SecureRandom.uuid+".jpg"
   end
+
   def users_cant_see
     (User.all - [self.user] - self.users).map{|x| [x.name, x.id]}
   end

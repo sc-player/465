@@ -40,7 +40,7 @@ class ImagesController < ApplicationController
 
     @uploaded_io = params[:image][:uploaded_file]
 
-    File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
+    File.open(image_save_path, 'wb') do |file|
       file.write(@uploaded_io.read)
     end
     respond_to do |format|
@@ -94,5 +94,9 @@ class ImagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
       params.require(:image).permit(:filename, :private)
+    end
+
+    def image_save_path
+      Rails.root.join('public', 'images', @image.filename)
     end
 end
