@@ -15,7 +15,26 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  <%if @task.subtasks.last.new_record?%>
+    <h3>Subtasks</h3>
+    <%= f.fields_for :subtasks do |subtasks_form| %>
+      <div style="margin-left:30px;">
+        <div class="field">
+          <%= subtasks_form.label :name %><br>
+          <%= subtasks_form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= subtasks_form.label :percent %><br>
+          <%= subtasks_form.range_field :percent, min: 0, max: 100, class: "slide", value: (if @count<=@remainder then (100/@numSubTasks).floor else (100/@numSubTasks).floor+1 end) %>
+          <% @output="task[subtasks_attributes][#{subtasks_form.options[:child_index]}][percent]" %>
+          <%= content_tag :output, "", for: @output, onforminput: "value=#{@output}.valueAsNumber;" %>
+        </div>
+        <%@count+=1%>
+      </div>
+    <% end %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+

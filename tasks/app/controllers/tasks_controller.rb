@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.all.map{|t| t if t.user.id==current_user.id}.compact
   end
 
   # GET /tasks/1
@@ -15,6 +15,10 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @numSubTasks=(params[:number_subtasks]!=nil) ? params[:number_subtasks].to_i : 4
+    (1..@numSubTasks).each do |i| @task.subtasks.new end
+    @count=0
+    @remainder=100 % @numSubTasks
   end
 
   # GET /tasks/1/edit
@@ -25,7 +29,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @task.user=current_user
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
@@ -69,6 +73,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name)
+      params.require(:task).permit(:name, subtasks_attributes: [:name, :percent])
     end
 end
