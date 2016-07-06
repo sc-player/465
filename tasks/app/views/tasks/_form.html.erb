@@ -25,7 +25,7 @@
         </div>
         <div class="field">
           <%= subtasks_form.label :percent %><br>
-          <%= subtasks_form.range_field :percent, min: 0, max: 100, class: "slide", value: (if @count<=@remainder then (100/@numSubTasks).floor else (100/@numSubTasks).floor+1 end) %>
+          <%= subtasks_form.range_field :percent, min: 0, max: 100, class: "slide", value: 100/@numSubTasks %>
           <output for=<%=slider_string subtasks_form.index%>, onforminput="value="+<%=slider_string subtasks_form.index%>></output>
           <%= content_tag :output, "", for: @output, onforminput: "value=#{@output}.valueAsNumber;" %>
         </div>

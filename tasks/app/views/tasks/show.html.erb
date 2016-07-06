@@ -7,13 +7,13 @@
 
 <p>
   <div class="w3-progress-container">
-    <div class="w3-progressbar" style=<%=("\"width:"+@task.get_total_percent+"%\"").html_safe%>></div>
+    <div class="w3-progressbar" id="mainProgressBar" style=<%=("\"width:"+@task.get_total_percent+"%\"").html_safe%>></div>
   </div>
 </p>
 
 <p>
   <%@task.subtasks.each do |t| %>
-    <%=t.name%><br>
+    <%= render 'complete', subtask: t %>
  <%end%>
 </p>
 

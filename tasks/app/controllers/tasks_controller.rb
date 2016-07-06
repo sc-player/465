@@ -64,6 +64,11 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def complete
+    @subtask=Subtask.find(params[:id])
+    @subtask.update_attribute :complete, true
+  end
 
   helper_method :slider_string
   def slider_string id
