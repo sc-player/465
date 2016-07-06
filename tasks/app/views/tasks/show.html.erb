@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -5,12 +6,15 @@
 </p>
 
 <p>
+  <div class="w3-progress-container">
+    <div class="w3-progressbar" style=<%=("\"width:"+@task.get_total_percent+"%\"").html_safe%>></div>
+  </div>
+</p>
+
+<p>
   <%@task.subtasks.each do |t| %>
-    <%=t.name%>
-    <div class="w3-progress-container">
-      <div class="w3-progressbar" style=<%=("\"width:"+t.percent.to_s+"%\"").html_safe%>></div>
-    </div>
-  <%end%>
+    <%=t.name%><br>
+ <%end%>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
