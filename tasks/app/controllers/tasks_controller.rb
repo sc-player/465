@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @numSubTasks=(params[:number_subtasks]!=nil) ? params[:number_subtasks].to_i : 4
-    (1..@numSubTasks).each do |i| @task.subtasks.new end
+    (1..@numSubTasks).each do |i| @task.subtasks.new complete: false end
     @count=0
     @remainder=100 % @numSubTasks
   end
@@ -64,6 +64,11 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  helper_method :slider_string
+  def slider_string id
+    "task[subtasks_attributes][#{id}][percent]"
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.

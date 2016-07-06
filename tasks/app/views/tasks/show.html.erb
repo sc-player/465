@@ -1,8 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @task.name %>
+  <h3 style="text-align:center;"><strong><%=@task.name%></strong></h3>
+</p>
+
+<p>
+  <%@task.subtasks.each do |t| %>
+    <%=t.name%>
+    <div class="w3-progress-container">
+      <div class="w3-progressbar" style=<%=("\"width:"+t.percent.to_s+"%\"").html_safe%>></div>
+    </div>
+  <%end%>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
