@@ -1,0 +1,13 @@
+$(document).ready(function(){
+  var el = document.getElementById("mainProgressBar");
+  var width = el.width;
+  var id = setInterval(frame, 10);
+  function frame(){
+    if (width >= <%=@subtask.task.get_total_percent%>) {
+      clearInterval(id);
+    } else {
+      width++;
+      el.style.width = width + '%';
+    }
+  }
+});

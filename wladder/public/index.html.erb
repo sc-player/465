@@ -1,0 +1,24 @@
+<h1>Philip Strachan:WordLadder</h1>
+<body>Fill in each step with a word that differs from the last word by no more than one letter. You don't have to fill in all the steps!<br>
+Step 0:  <%=@startend[0]%>
+<%=form_tag(words_path,method:"get") do %>
+  <%=label_tag(:word1, "Step 1: ")%>
+  <%=text_field_tag(:word1)%>
+  <br>
+  <%=label_tag(:word2, "Step 2: ")%>
+  <%=text_field_tag(:word2)%>
+  <br>
+  <%=label_tag(:word3, "Step 3: ")%> 
+  <%=text_field_tag(:word3)%>
+  <br>
+  <%=label_tag(:word4, "Step 4: ")%> 
+  <%=text_field_tag(:word4)%>
+  <br>
+  <%=label_tag(:word5, "Step 5: ")%> 
+  <%=text_field_tag(:word5)%> 
+  <%=hidden_field_tag(:word0, value=@startend[0])%>
+  <%=hidden_field_tag(:goal, value=@startend[1])%>
+  <%=submit_tag("Check")%>
+<%end%>
+Goal:  <%=@startend[1]%>
+</body>
