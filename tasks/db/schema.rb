@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705010356) do
-
-  create_table "links", force: :cascade do |t|
-    t.string   "url"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "links", ["user_id"], name: "index_links_on_user_id"
+ActiveRecord::Schema.define(version: 20160706072841) do
 
   create_table "subtasks", force: :cascade do |t|
     t.integer  "task_id"
@@ -29,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160705010356) do
     t.boolean  "complete",   default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "parent_id"
   end
 
   add_index "subtasks", ["task_id"], name: "index_subtasks_on_task_id"

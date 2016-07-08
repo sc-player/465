@@ -4,12 +4,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.map{|t| t if t.user.id==current_user.id}.compact
+    @tasks = Task.where user_id: current_user.id
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @subtasks=@task.subtasks.select{|s| s.parent_id==nil}
   end
 
   # GET /tasks/new
@@ -68,6 +69,22 @@ class TasksController < ApplicationController
   def complete
     @subtask=Subtask.find(params[:id])
     @subtask.update_attribute :complete, true
+  end
+
+  def split
+    @subtask=Subtask.find(params[:id])
+    @numSubTasks=(params[:number_subtasks]).to_i
+    @newSubTasks=Array.new
+    (1..@numSubTasks).each do |i| @subtask.children.build(name: i.to_s, percent: 100/@numSubTasks) end
+    @count=0
+    @remainder= 100 % @numSubTasks
+  end
+
+  def createSubtasks
+    @subtask=Subtask.find(params[:id])
+    @children=params[:subtask][:children_attributes].to_a.map{|x| x[1]}
+    @children.each do |x| @subtask.children.build(name: x["name"], percent: x["percent"], task_id: @subtask.task_id).save end
+    redirect_to @subtask.task
   end
 
   helper_method :slider_string

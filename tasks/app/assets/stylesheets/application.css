@@ -1,1 +1,7 @@
-*= require w3
+body{
+  margin:10px 20px !important;
+}
+
+.split form{
+  display:inline-block;
+}

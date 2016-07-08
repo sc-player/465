@@ -5,17 +5,16 @@
   <h3 style="text-align:center;"><strong><%=@task.name%></strong></h3>
 </p>
 
-<p>
-  <div class="w3-progress-container">
-    <div class="w3-progressbar" id="mainProgressBar" style=<%=("\"width:"+@task.get_total_percent+"%\"").html_safe%>></div>
-  </div>
-</p>
+<div class="w3-progress-container" id="mainProgressContainer">
+  <div id="mainProgressBar" class="w3-progressbar" style=<%=("\"width:"+@task.get_total_percent+"%\"").html_safe%>></div>
+</div>
 
 <p>
-  <%@task.subtasks.each do |t| %>
-    <%= render 'complete', subtask: t %>
- <%end%>
+  <ul>
+    <%=render @subtasks%>
+  </ul>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Rename', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
+</div>
