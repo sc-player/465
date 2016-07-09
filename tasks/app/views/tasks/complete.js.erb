@@ -1,12 +1,22 @@
-  var el = $('#mainProgressBar');
-  var width = el.prop('style')['width'];
-  el.html(width)
+function move(el, amt){
+  var width = el.prop('value');
+  var end = width+Number(amt);
   var id = setInterval(frame, 10);
   function frame(){
-    if (width >= 100) {
+    if (width >= end) {
       clearInterval(id);
     } else {
       width++;
-      el.css('width', width);
+      el.prop('value', width);
     }
   }
+}
+
+var percent=<%=@subtask.percent%>;
+<%while @subtask.calcLevel>0 do%>
+  move($('#progressBar'+<%=@subtask.calcLevel-1%>), percent);
+  <%@subtask=Subtask.find(@subtask.parent_id)%>
+  percent=percent*<%=@subtask.percent%>/100;
+<% end %>
+
+move($('#mainProgressBar'), percent);

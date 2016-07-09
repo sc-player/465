@@ -1,18 +1,11 @@
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <p id="notice"><%= notice %></p>
 
-<p>
-  <h3 style="text-align:center;"><strong><%=@task.name%></strong></h3>
-</p>
+<h1 style="text-align:center;"><%=@task.name%></h1>
 
-<progress id="mainProgressBar" value=<%=get_progress_value @task%>  max="100" style="width:100%;"></progress>
+<progress id="mainProgressBar" value=<%=get_progress_value @task%>  max="100" style="width:100%; height:30px;"></progress>
 
-<p>
-  <ul>
-    <%=render @subtasks%>
-  </ul>
-</p>
+<%=render @subtasks%>
 
-<%= link_to 'Rename', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
 </div>
+

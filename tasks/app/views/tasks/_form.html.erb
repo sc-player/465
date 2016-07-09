@@ -15,24 +15,22 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <h3>Subtasks</h3>
-  <%= f.fields_for :subtasks do |subtasks_form| %>
-    <div style="margin-left:30px;">
-      <div class="field">
-        <%= subtasks_form.label :name %><br>
-        <%= subtasks_form.text_field :name %>
-      </div>
-      <% if @task.new_record? %>
+  <%if@task.new_record?%>
+    <h3>Subtasks</h3>
+    <%= f.fields_for :subtasks do |subtasks_form| %>
+      <div style="margin-left:30px;">
         <div class="field">
-          <%= subtasks_form.label :percent %><br>
-          <%= subtasks_form.range_field :percent, min: 0, max: 100, class: "slide", value: 100/@numSubTasks %>
-          <output for=<%=slider_string subtasks_form.index%>, onforminput="value="+<%=slider_string subtasks_form.index%>></output>
-          <%= content_tag :output, "", for: @output, onforminput: "value=#{@output}.valueAsNumber;" %>
+          <%= subtasks_form.label :name %><br>
+          <%= subtasks_form.text_field :name %>
         </div>
-        <%@count+=1%>
-      <% end%>
-    </div>
-  <% end %><br>
+          <div class="field">
+            <%= subtasks_form.label :percent %><br>
+            <%= subtasks_form.range_field :percent, min: 0, max: 100, class: "slide", value: 100/@numSubTasks %>
+          </div>
+          <%@count+=1%>
+      </div>
+    <% end %><br>
+  <%end%>
   <div class="actions">
     <%= f.submit %>
   </div>

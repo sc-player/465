@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  respond_to :js, only: :complete
 
   # GET /tasks
   # GET /tasks.json
@@ -69,6 +70,7 @@ class TasksController < ApplicationController
   def complete
     @subtask=Subtask.find(params[:id])
     @subtask.update_attribute :complete, true
+    respond_with(@subtask)
   end
 
   def split
