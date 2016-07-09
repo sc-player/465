@@ -5,9 +5,7 @@
   <h3 style="text-align:center;"><strong><%=@task.name%></strong></h3>
 </p>
 
-<div class="w3-progress-container" id="mainProgressContainer">
-  <div id="mainProgressBar" class="w3-progressbar" style=<%=("\"width:"+@task.get_total_percent+"%\"").html_safe%>></div>
-</div>
+<progress id="mainProgressBar" value=<%=get_progress_value @task%>  max="100" style="width:100%;"></progress>
 
 <p>
   <ul>

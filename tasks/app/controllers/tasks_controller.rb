@@ -92,6 +92,17 @@ class TasksController < ApplicationController
     "task[subtasks_attributes][#{id}][percent]"
   end  
 
+  helper_method :get_progress_value
+  def get_progress_value task
+    if task.is_a? Task
+      return task.subtasks.map{|t| get_progress_value t if t.parent_id==nil}.compact.sum
+    elsif task.children.empty?
+      return (if task.complete then task.percent else 0 end)
+    else
+      return task.children.map{|t| get_progress_value t}.sum*(task.percent.to_f/100.0) 
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
