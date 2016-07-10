@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :tasks
+  resources :tasks, except: [:edit]
   post '/tasks/new', to: 'tasks#new'
-  patch 'subtasks/:id/complete', to: 'tasks#complete'
+  patch '/subtasks/:id/complete', to: 'tasks#complete'
   patch 'subtasks/:id', to: 'tasks#createSubtasks'
   post 'subtasks/:id', to: 'tasks#split', as: 'subtask'
 

@@ -12,10 +12,11 @@ function move(el, amt){
   }
 }
 
+$('#split'+<%=@subtask.id%>).replaceWith("Complete");
 var percent=<%=@subtask.percent%>;
-<%while @subtask.calcLevel>0 do%>
-  move($('#progressBar'+<%=@subtask.calcLevel-1%>), percent);
+<%while @subtask.calcLevel>1 do%>
   <%@subtask=Subtask.find(@subtask.parent_id)%>
+  move($('#progressBar'+<%=@subtask.id%>), percent);
   percent=percent*<%=@subtask.percent%>/100;
 <% end %>
 

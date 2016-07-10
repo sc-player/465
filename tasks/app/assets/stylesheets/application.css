@@ -13,12 +13,14 @@ a{
 
 hr{
   border:0;
+  margin-top:10px;
+  margin-bottom:20px;
   height:0;
 }
 
 hr.one{
+  margin-bottom:30px;
   box-shadow:0 0 10px 3px green;
-  margin-top:5px;
 }
 
 hr.two{
@@ -31,61 +33,6 @@ hr:after{
   content "\00a0";
 }
 
-input[type=range]{
-  -webkit-appearance: none;
-  width: 25%;
-  background: transparent;
-}
-
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance: none;
-  background: #5f9ea0;
-  border: 0px solid #000000;
-}
-
-input[type=range]::-moz-range-thumb{
-  background:#5f9ea0;
-  border: 0px solid #000000;
-}
-
-input[type=range]::-ms-thumb{
-  background: #5f9ea0;
-  border: 0px solid #000000;
-}
-
-input[type=range]::-webkit-slider-runnable-track{
-  width:100%;
-  cursor:pointer;
-  background: transparent;
-  border-color: transparent;
-  color:transparent;
-}
-
-input[type=range]::-moz-range-track{
-  width:100%;
-  cursor:pointer;
-  background: transparent;
-  border-color: transparent;
-  color:transparent;
-}
-
-
-input[type=range]::-ms-track{
-  width: 100%;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  color:transparent;
-}
-
-input[type=range]::-ms-fill-lower{
-  background: #008000;
-}
-
-input[type=range]::-ms-fill-upper{
-  background: #111;
-}
-
 .split form{
   display:inline-block;
 }
@@ -95,13 +42,13 @@ progress{
   -moz-appearance:none;
   appearance:none;
   color:green;
-  background-color: #fff;
+  background-color: #222;
 }
 
 progress::-webkit-progress-bar{
-  background-color: #fff;
-  border-radius: 2px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  background-color: #222;
+  border-radius:3px;
 }
 
 progress[value]::-webkit-progress-value{

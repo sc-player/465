@@ -24,8 +24,7 @@
           <%= subtasks_form.text_field :name %>
         </div>
           <div class="field">
-            <%= subtasks_form.label :percent %><br>
-            <%= subtasks_form.range_field :percent, min: 0, max: 100, class: "slide", value: 100/@numSubTasks %>
+            <%= subtasks_form.hidden_field :percent, value: 100/@numSubTasks.to_f %>
           </div>
           <%@count+=1%>
       </div>

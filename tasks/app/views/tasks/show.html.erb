@@ -3,9 +3,7 @@
 <h1 style="text-align:center;"><%=@task.name%></h1>
 
 <progress id="mainProgressBar" value=<%=get_progress_value @task%>  max="100" style="width:100%; height:30px;"></progress>
-
+<hr class=one>
 <%=render @subtasks%>
 
 <%= link_to 'Back', tasks_path %>
-</div>
-
