@@ -26,11 +26,28 @@ hr.one{
 hr.two{
   box-shadow:0 0 10px 2px green;
 }
+
 hr.three{
   box-shadow:0 0 10px 1px green;
 }
+
 hr:after{
   content "\00a0";
+}
+
+input[type=submit]{
+  background-color: #333;
+  color: red;
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: green;
+}
+
+select{
+  background-color:#333;
+  color: red;
+  border-color:green;
+  border-width:3px;
 }
 
 .split form{
