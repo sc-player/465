@@ -35,6 +35,19 @@ hr:after{
   content "\00a0";
 }
 
+input[type="text"], input[type="password"], input[type="url"]{
+  color: #fff;
+  background-color: #333;
+  border: 2px solid #fff;
+}
+
+textarea{
+  color: #fff;
+  background-color: #333;
+  resize: none;
+  border: 3px solid #fff;
+}
+
 input[type=submit]{
   background-color: #333;
   color: red;

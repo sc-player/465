@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706072841) do
+ActiveRecord::Schema.define(version: 20160711084351) do
 
   create_table "subtasks", force: :cascade do |t|
     t.integer  "task_id"
-    t.integer  "percent",                    null: false
+    t.float    "percent",                    null: false
     t.string   "name",                       null: false
     t.boolean  "complete",   default: false
     t.datetime "created_at",                 null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160706072841) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "complete"
   end
 
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"

@@ -1,11 +1,27 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :configure_permitted_parameters, only: [:create]
+  before_filter :configure_permitted_parameters, only: [:create, :update]
+
+  def edit
+  end
+
   def create
     super
     @uploaded_io = params[:user][:avatar]
     Dir.mkdir(user_dir_path, 0700) unless Dir.exist? user_dir_path
-    File.open user_dir_path.join('avatar.jpg'), 'wb' do |file|
-      file.write(@uploaded_io.read)
+    if params[:user][:avatar]
+      File.open user_dir_path.join('avatar.jpg'), 'wb' do |file|
+        file.write(@uploaded_io.read)
+      end
+    end
+  end
+
+  def update
+    super
+    @uploaded_io = params[:user][:avatar]
+    if params[:user][:avatar]
+      File.open user_dir_path.join('avatar.jpg'), 'wb' do |file|
+        file.write(@uploaded_io.read)
+      end
     end
   end
   
@@ -15,6 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) << :bio
+      devise_parameter_sanitizer.for(:sign_up) << :bio << :avatar
+      devise_parameter_sanitizer.for(:account_update) << :bio << :avatar
     end
 end

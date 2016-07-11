@@ -1,5 +1,5 @@
-<h1>Listing Tasks</h1>
-
+<h1>Your Tasks</h1>
+<%if @tasks.length>0%>
 <table>
   <thead>
     <tr>
@@ -12,13 +12,14 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= link_to task.name, task %></td>
+        <td><%= link_to task.name, task %> <%= image_tag "/assets/complete.png", size: "16x16" if task.complete%></td>
         <td style="width:70%; padding-left:1em;"><progress value=<%=get_progress_value task%> max="100" style="width:100%; height:15px;"></progress></td>
         <td style="padding-left:1em;"><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%end%>
 
 <br>
 <%= form_tag new_task_path :method => :post do %>

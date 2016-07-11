@@ -76,7 +76,6 @@ class TasksController < ApplicationController
   def split
     @subtask=Subtask.find(params[:id])
     @numSubTasks=(params[:number_subtasks]).to_i
-    @newSubTasks=Array.new
     (1..@numSubTasks).each do |i| @subtask.children.build(name: i.to_s, percent: 100/@numSubTasks) end
     @count=0
     @remainder= 100 % @numSubTasks
@@ -88,11 +87,15 @@ class TasksController < ApplicationController
     @children.each do |x| @subtask.children.build(name: x["name"], percent: x["percent"], task_id: @subtask.task_id).save end
     redirect_to @subtask.task
   end
-
-  helper_method :slider_string
-  def slider_string id
-    "task[subtasks_attributes][#{id}][percent]"
-  end  
+ 
+  def completeExtra
+    @subtask=Subtask.find(params[:id])
+    if params[:el]=="mainProgressBar"
+      @subtask.task.update_attribute(:complete, true)
+    else
+      Subtask.find(@subtask.parent_id).update_attribute(:complete, true)
+    end
+  end
 
   helper_method :get_progress_value
   def get_progress_value task

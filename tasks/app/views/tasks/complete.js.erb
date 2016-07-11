@@ -1,18 +1,32 @@
 function move(el, amt){
   var width = el.prop('value');
   var end = width+Number(amt);
-  var id = setInterval(frame, 2000/amt);
+  var id = setInterval(frame, 10);
   function frame(){
     if (width >= end) {
       clearInterval(id);
+      if(end>=99){
+        el.prop('value', '100');
+        if(el.attr('id')!='mainProgressBar'){
+          el.before("<img src='<%= asset_path('assets/complete.png')%>', width='16', height='16' />");
+        }
+        $.ajax({
+          type: "PATCH",
+          url:'/subtasks/<%=@subtask.id.to_s%>/completeExtra',
+          data:(
+            'id=' + <%=@subtask.id.to_s%>,
+            'el=' + el.attr('id')
+          )
+        })
+      }
     } else {
-      width++;
+      width+=.75;
       el.prop('value', width);
     }
   }
 }
 
-$('#split'+<%=@subtask.id%>).replaceWith("Complete");
+$('#split'+<%=@subtask.id%>).replaceWith("<img src='<%= asset_path('assets/complete.png')%>', width='16', height='16' />");
 var percent=<%=@subtask.percent%>;
 <%while @subtask.calcLevel>1 do%>
   <%@subtask=Subtask.find(@subtask.parent_id)%>
