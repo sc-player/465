@@ -32,7 +32,7 @@ hr.three{
 }
 
 hr:after{
-  content "\00a0";
+  content: "\00a0";
 }
 
 input[type="text"], input[type="password"], input[type="url"]{

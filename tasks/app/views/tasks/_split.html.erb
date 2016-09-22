@@ -1,0 +1,4 @@
+<%=form_tag subtask_path(subtask), method: :post do %>
+  <%=submit_tag("Split")%>
+  <%=select_tag(:number_subtasks, options_for_select(2..10)) %>
+<% end -%>

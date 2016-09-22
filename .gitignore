@@ -40,4 +40,7 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
-/img/public/images
+/tasks/app/assets/images/*
+/tasks/public/assets/*
+/tasks/log/*
+/tasks/tmp/*

@@ -1,0 +1,30 @@
+<h3>Split Subtask "<%=@subtask.name%>"</h3>
+<%=form_for @subtask do |f| %>
+  <% if @subtask.errors.any? %>
+    <div id="error_explanation">
+      <h2><%=pluralize @task.errors.count, "error" %> prohibited this task from being saved:</h2>
+      <ul>
+      <% @subtask.errors.full_messages.each do |message| %>
+        <li><%= message %> </li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%@subtask.children.each do |sub|%>
+    <%=f.fields_for :children, sub do |form| %>
+      <div class="field">
+        <%=form.label :name %><br>
+        <%=form.text_field :name%>
+      </div>
+      <div class="field">
+        <%=form.hidden_field :percent, value: 100/@numSubTasks.to_f %>
+      </div>
+      <%@count+=1%>
+    <% end %>
+  <%end%><br>
+  <div class="actions">
+    <%=f.submit %>
+  </div>
+<% end %>
+
+<%=link_to "Back", tasks_path%>
