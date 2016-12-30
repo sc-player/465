@@ -15,7 +15,15 @@
   </span>
   <div style="clear: both;"></div>
 </div>
-<%if !subtask.parent_id && !subtask.children.empty? %><hr class=two><%elsif subtask.parent_id %><hr class=three><%end%>
+
+<%if !subtask.parent_id && !subtask.children.empty? %>
+  <hr class=two>
+<%elsif subtask.parent_id %>
+  <hr class=three>
+<%else%>
+  <br>
+<%end%>
+
 <div style="padding-left:30px">
   <%=render subtask.children%>
 </div>

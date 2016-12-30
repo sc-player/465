@@ -1,14 +1,15 @@
 html{
-  color:green;
-  background-color:black;
+  background-color:#ccc;
 }
 
 body{
   margin:10px 20px !important;
+  color:black;
+  font-family:Arial;
 }
 
 a{
-  color:red;
+  color:darkred;
 }
 
 hr{
@@ -36,24 +37,24 @@ hr:after{
 }
 
 input[type="text"], input[type="password"], input[type="url"]{
-  color: #fff;
-  background-color: #333;
-  border: 2px solid #fff;
+  color: lightgreen;
+  background-color: #888;
+  border: 2px solid black;
 }
 
 textarea{
-  color: #fff;
-  background-color: #333;
+  color: lightgreen;
+  background-color: #888;
   resize: none;
-  border: 3px solid #fff;
+  border: 3px solid black;
 }
 
 input[type=submit]{
-  background-color: #333;
-  color: red;
+  background-color: #aaa;
+  color: darkred;
   border-width: 3px;
   border-radius: 5px;
-  border-color: green;
+  border-color: black;
 }
 
 select{
