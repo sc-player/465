@@ -14,7 +14,8 @@
     <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
   </span>
   <span class="alignright">
-   <%= link_to "View Profile", current_user %>
+   <%= link_to "View Profile", current_user %> <br>
+   <%= link_to (@cancel ? 'Cancel' : 'Back'), tasks_path if @back %>
   </span>
 <% end %>
 </div>

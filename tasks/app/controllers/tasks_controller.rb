@@ -12,6 +12,7 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @subtasks=@task.subtasks.select{|s| s.parent_id==nil}
+    @back=true
   end
 
   # GET /tasks/new
@@ -21,10 +22,14 @@ class TasksController < ApplicationController
     (1..@numSubTasks).each do |i| @task.subtasks.new complete: false end
     @count=0
     @remainder=100 % @numSubTasks
+    @back=true
+    @cancel=true
   end
 
   # GET /tasks/1/edit
   def edit
+    @back=true
+    @cancel=true
   end
 
   # POST /tasks
@@ -74,6 +79,8 @@ class TasksController < ApplicationController
   end
 
   def split
+    @back=true
+    @cancel=true
     @subtask=Subtask.find(params[:id])
     @numSubTasks=(params[:number_subtasks]).to_i
     (1..@numSubTasks).each do |i| @subtask.children.build(name: i.to_s, percent: 100/@numSubTasks) end
