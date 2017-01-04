@@ -6,10 +6,9 @@
   <%= image_tag "/assets/noavatar.png", size: "250x250" %>
 <%end%>
 <br>
-<h3>Bio</h3>
+<h3>About <%=current_user.username%></h3>
 <hr class=two>
 <%= current_user.bio %>
 <br>
-<br>
-<%= link_to "Edit Profile", edit_user_registration_path(current_user) %>
-<%= link_to "Back", tasks_path %>
+<%= button_to "Edit Profile", edit_user_registration_path(current_user), method: :get %>
+<%= button_to "Back", tasks_path, method: :get %>

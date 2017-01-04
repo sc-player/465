@@ -1,15 +1,17 @@
 html{
   background-color:#ccc;
+  height: 100%;
 }
 
 body{
   margin:10px 20px !important;
+  height: 100%;
   color:black;
   font-family:Arial;
 }
 
 a{
-  color:darkred;
+  color:darkgreen;
 }
 
 hr{
@@ -55,17 +57,14 @@ input[type=submit]{
   border-width: 3px;
   border-radius: 5px;
   border-color: black;
+  padding: 5px;
 }
 
 select{
-  background-color:#333;
-  color: red;
-  border-color:green;
+  background-color:#aaa;
+  color: darkred;
+  border-color:black;
   border-width:3px;
-}
-
-.split form{
-  display:inline-block;
 }
 
 progress{
@@ -104,10 +103,31 @@ progress[value]::-webkit-progress-value{
   100% { background-position: -100px 0px; }
 }
 
-.alignleft{
-  float:left;
+.alignright{
+  display:inline-block;
+  float:right;
 }
 
-.alignright{
-  float:right;
+#user_nav{
+  height:10px;
+}
+
+.taskView{
+  overflow: hidden;
+}
+
+.subTaskBox{
+  height:calc(100% - 180px);
+}
+
+.subTaskWrap{
+  position:relative;
+  height: 100%;
+}
+
+.subTasks{
+  position:absolute;
+  top:0; bottom:0;
+  left:0; right:0;
+  overflow-y: auto;
 }

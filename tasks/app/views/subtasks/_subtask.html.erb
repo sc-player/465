@@ -1,20 +1,20 @@
-<div>
-  <span class="alignleft">
-    <%=subtask.name%>
-  </span>
-  <span class="alignright">
-    <div class="split" id="split<%=subtask.id%>">
-      <%=image_tag "/assets/complete.png", size:"16x16" if subtask.complete%>
-      <%if subtask.children.empty?%>
-        <%=render("complete", subtask: subtask) unless subtask.complete%>
+<%=subtask.name%>
+  <div id="split<%=subtask.id%>" style="display:inline-block; width:99%">
+    <%=image_tag "/assets/complete.png", size:"16x16" if subtask.complete%>
+    <%if subtask.children.empty?%>
+      <div class="alignright">
         <%=render("split", subtask: subtask) unless subtask.complete%>
-      <%else%>
+      </div>
+      <div class="alignright">
+        <%=render("complete", subtask: subtask) unless subtask.complete%>
+      </div>
+    <%else%>
+      <div class="alignright">
         <progress id="progressBar<%=subtask.id%>" value=<%=(get_progress_value subtask)*100/subtask.percent.to_f%> max="100" style="height:15px;"></progress>
-      <%end%>
-    </div>
-  </span>
-  <div style="clear: both;"></div>
-</div>
+      </div>
+    <%end%>
+  </div>
+<div style="clear: both;"></div>
 
 <%if !subtask.parent_id && !subtask.children.empty? %>
   <hr class=two>

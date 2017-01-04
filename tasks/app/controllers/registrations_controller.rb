@@ -2,6 +2,8 @@ class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters, only: [:create, :update]
 
   def edit
+    @cancel=true;
+    @back=true;
   end
 
   def create

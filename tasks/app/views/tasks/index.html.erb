@@ -23,6 +23,7 @@
 
 <br>
 <%= form_tag new_task_path :method => :post do %>
+  Select number of subtasks:
   <%= select_tag(:number_subtasks, options_for_select(1..10))%>
   <%= submit_tag 'New Task' %>
 <% end %>

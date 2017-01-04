@@ -3,4 +3,10 @@
 <progress id="mainProgressBar" value=<%=get_progress_value @task%>  max="100" style="width:100%; height:30px;"></progress>
 <br>
 <hr class=one>
-<%=render @subtasks%>
+<div class="subTaskBox">
+  <div class="subTaskWrap">
+    <div class="subTasks">
+      <%=render @subtasks%>
+    </div>
+  </div>
+</div>

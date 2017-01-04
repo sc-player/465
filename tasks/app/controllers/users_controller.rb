@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
   def show
-    render layout: false
+    @hideNav=true;
   end
 end
