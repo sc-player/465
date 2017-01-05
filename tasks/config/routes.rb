@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post '/tasks/new', to: 'tasks#new'
   patch '/subtasks/:id/complete', to: 'tasks#complete'
   patch 'subtasks/:id', to: 'tasks#createSubtasks'
-  post 'subtasks/:id', to: 'tasks#split', as: 'subtask'
+  patch 'subtasks/:id/split', to: 'tasks#split', defaults: { format: 'js' }
   patch 'subtasks/:id/completeExtra', to: 'tasks#completeExtra'
 
   devise_for :users, controllers:{users: "users", registrations: 'registrations'}

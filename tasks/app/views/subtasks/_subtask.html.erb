@@ -1,6 +1,7 @@
-<%=subtask.name%>
-  <div id="split<%=subtask.id%>" style="display:inline-block; width:99%">
-    <%=image_tag "/assets/complete.png", size:"16x16" if subtask.complete%>
+<div id="subtask<%=subtask.id%>"> 
+  <div id="split<%=subtask.id%>" style="display:inline; width:99%">
+    <%=subtask.name%>
+    <%=image_tag "/assets/complete.png", size:"16x16" if false%><%#subtask.complete%>
     <%if subtask.children.empty?%>
       <div class="alignright">
         <%=render("split", subtask: subtask) unless subtask.complete%>
@@ -14,16 +15,17 @@
       </div>
     <%end%>
   </div>
-<div style="clear: both;"></div>
 
-<%if !subtask.parent_id && !subtask.children.empty? %>
-  <hr class=two>
-<%elsif subtask.parent_id %>
-  <hr class=three>
-<%else%>
-  <br>
-<%end%>
+  <div style="clear: both;"></div>
 
-<div style="padding-left:30px">
-  <%=render subtask.children%>
+  <%if !subtask.parent_id && !subtask.children.empty? %>
+    <hr class=two>
+  <%elsif subtask.parent_id %>
+    <hr class=three>
+  <%else%>
+    <br>
+  <%end%>
+  <div style="padding-left:30px">
+    <%=render subtask.children%>
+  </div>
 </div>

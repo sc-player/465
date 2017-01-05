@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  respond_to :js, only: :complete
+  respond_to :js, only: [:complete, :split]
 
   # GET /tasks
   # GET /tasks.json
@@ -86,6 +86,13 @@ class TasksController < ApplicationController
     (1..@numSubTasks).each do |i| @subtask.children.build(name: i.to_s, percent: 100/@numSubTasks) end
     @count=0
     @remainder= 100 % @numSubTasks
+    @subtask.save
+    respond_with @subtask
+    #respond_to do |format|
+    #  if @subtask.save
+    #    format.js { render @subtask }
+    #  end
+    #end
   end
 
   def createSubtasks
