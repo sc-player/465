@@ -1,27 +1,51 @@
 <div id="subtask<%=subtask.id%>"> 
   <div id="split<%=subtask.id%>" style="display:inline; width:99%">
-    <%=subtask.name%>
-    <%=image_tag "/assets/complete.png", size:"16x16" if false%><%#subtask.complete%>
+    <div class="subTaskName" id="name<%=subtask.id%>">
+      <%=subtask.name%>
+    </div>
+    <div class="subTaskRename" id="rename<%=subtask.id%>">
+      <%=form_for subtask, url: {action: "rename", id: subtask.id} do |f|%>
+        <%=f.text_field :name%>
+        <%=f.submit "Save Name"%>
+      <%end%>
+    </div>
     <%if subtask.children.empty?%>
-      <div class="alignright">
-        <%=render("split", subtask: subtask) unless subtask.complete%>
-      </div>
-      <div class="alignright">
-        <%=render("complete", subtask: subtask) unless subtask.complete%>
-      </div>
+      <%unless subtask.complete%>
+        <div class="alignright">
+          <%=render "split", subtask: subtask%>
+        </div>
+        <div class="alignright">
+          <%=render "complete", subtask: subtask%>
+        </div>
+      <%else%>
+        <div class="alignright">
+          <%=image_tag "/assets/complete.png", size:"16x16"%>
+        </div>
+      <%end%>
     <%else%>
-      <div class="alignright">
-        <progress id="progressBar<%=subtask.id%>" value=<%=(get_progress_value subtask)*100/subtask.percent.to_f%> max="100" style="height:15px;"></progress>
-      </div>
+      <%unless subtask.complete%>
+        <div class="alignright">
+          <progress id="progressBar<%=subtask.id%>" value=<%=(get_progress_value subtask)*100/subtask.percent.to_f%> max="100" style="height:15px;"></progress>
+        </div>
+      <%else%>
+        <div class="alignright"> 
+          <%=image_tag "/assets/complete.png", size:"16x16"%>
+        </div>
+      <%end%>
     <%end%>
+    <div class="alignright">
+      <input type="button" value="Rename" id='rbutton<%=subtask.id%>'> 
+    </div>
   </div>
 
   <div style="clear: both;"></div>
 
-  <%if !subtask.parent_id && !subtask.children.empty? %>
-    <hr class=two>
-  <%elsif subtask.parent_id %>
-    <hr class=three>
+  <%if !subtask.children.empty? %>
+    <%if !subtask.parent_id %>
+      <hr class=two>
+    <%else%>
+      <hr class=three>
+    <%end%>
   <%else%>
     <br>
   <%end%>
@@ -29,3 +53,6 @@
     <%=render subtask.children%>
   </div>
 </div>
+
+<script> SetUpRNHandler(<%=subtask.id%>); </script>
+

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  respond_to :js, only: [:complete, :split]
+  respond_to :js, only: [:complete, :split, :rename]
 
   # GET /tasks
   # GET /tasks.json
@@ -109,6 +109,10 @@ class TasksController < ApplicationController
     else
       Subtask.find(@subtask.parent_id).update_attribute(:complete, true)
     end
+  end
+
+  def rename
+    @subtask=Subtask.find(params[:id]);
   end
 
   helper_method :get_progress_value

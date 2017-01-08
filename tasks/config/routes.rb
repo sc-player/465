@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   patch 'subtasks/:id', to: 'tasks#createSubtasks'
   patch 'subtasks/:id/split', to: 'tasks#split', defaults: { format: 'js' }
   patch 'subtasks/:id/completeExtra', to: 'tasks#completeExtra'
+  patch 'subtasks/:id/rename', to: 'tasks#rename'
 
   devise_for :users, controllers:{users: "users", registrations: 'registrations'}
   get 'users/:id', to: 'users#show', as: :user

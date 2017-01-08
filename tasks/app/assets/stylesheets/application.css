@@ -51,7 +51,7 @@ textarea{
   border: 3px solid black;
 }
 
-input[type=submit]{
+input[type="submit"], input[type="button"]{
   background-color: #aaa;
   color: darkred;
   border-width: 3px;
@@ -73,6 +73,9 @@ progress{
   appearance:none;
   color:green;
   background-color: #222;
+  margin-left: 10px;
+  position: relative;
+  top: 7px;
 }
 
 progress::-webkit-progress-bar{
@@ -130,4 +133,18 @@ progress[value]::-webkit-progress-value{
   top:0; bottom:0;
   left:0; right:0;
   overflow-y: auto;
+}
+
+.subTaskLeft{
+  float:left;
+  padding-right:10px;
+}
+
+.subTaskName{
+  float:left;
+}
+
+.subTaskRename{
+  display: none;
+  float:left;
 }

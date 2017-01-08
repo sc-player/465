@@ -1,0 +1,21 @@
+var id = <%=@subtask.id%>;
+var el = $('#name'+id)[0];
+
+var val = el.innerHTML;
+var input = document.createElement("input");
+input.type = "text";
+input.value = val.trim();
+el.style.display = "none";
+el.parentNode.insertBefore(input, el);
+
+var sub = document.createElement("submit");
+sub.value = 'Submit';
+el.parentNode.insertBefore(sub, el);
+
+var canc = document.createElement("submit");
+canc.value = 'Cancel';
+el.parentNode.insertBefore(canc, el);
+
+$('#sub'+id).click(function(){
+  $.ajax();
+});
