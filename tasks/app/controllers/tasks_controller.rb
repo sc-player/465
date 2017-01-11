@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_subtask, only: [:complete, :completeExtra, :createSubtasks, :split, :rename]
   respond_to :js, only: [:complete, :split, :rename]
 
   # GET /tasks
@@ -73,7 +74,6 @@ class TasksController < ApplicationController
   end
   
   def complete
-    @subtask=Subtask.find(params[:id])
     @subtask.update_attribute :complete, true
     respond_with(@subtask)
   end
@@ -81,29 +81,21 @@ class TasksController < ApplicationController
   def split
     @back=true
     @cancel=true
-    @subtask=Subtask.find(params[:id])
     @numSubTasks=(params[:number_subtasks]).to_i
     (1..@numSubTasks).each do |i| @subtask.children.build(name: i.to_s, percent: 100/@numSubTasks) end
     @count=0
     @remainder= 100 % @numSubTasks
     @subtask.save
     respond_with @subtask
-    #respond_to do |format|
-    #  if @subtask.save
-    #    format.js { render @subtask }
-    #  end
-    #end
   end
 
   def createSubtasks
-    @subtask=Subtask.find(params[:id])
     @children=params[:subtask][:children_attributes].to_a.map{|x| x[1]}
     @children.each do |x| @subtask.children.build(name: x["name"], percent: x["percent"], task_id: @subtask.task_id).save end
     redirect_to @subtask.task
   end
  
   def completeExtra
-    @subtask=Subtask.find(params[:id])
     if params[:el]=="mainProgressBar"
       @subtask.task.update_attribute(:complete, true)
     else
@@ -112,7 +104,8 @@ class TasksController < ApplicationController
   end
 
   def rename
-    @subtask=Subtask.find(params[:id]);
+    @subtask.update_attribute :name, params[:subtask][:name]
+    head :no_content
   end
 
   helper_method :get_progress_value
@@ -130,6 +123,10 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def set_subtask
+      @subtask = Subtask.find(params[:id]);
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

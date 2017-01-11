@@ -4,7 +4,7 @@
       <%=subtask.name%>
     </div>
     <div class="subTaskRename" id="rename<%=subtask.id%>">
-      <%=form_for subtask, url: {action: "rename", id: subtask.id} do |f|%>
+      <%=form_for subtask, url: {action: "rename", id: subtask.id}, remote: true do |f|%>
         <%=f.text_field :name%>
         <%=f.submit "Save Name"%>
       <%end%>
